@@ -34,6 +34,7 @@ syntax enable		"enable syntax processing
 set background=dark
 if has('gui_running')
     colorscheme solarized
+    set guifont="Inconsolata 11"
 endif
 set laststatus=2    "Always show status line
 
