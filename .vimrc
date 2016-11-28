@@ -36,7 +36,7 @@ set background=dark
 if has('gui_running')
     colorscheme solarized
     set guifont="Inconsolata 11"
-		set guioptions+=b "Bottom scroll bar
+    set guioptions+=b "Bottom scroll bar
 endif
 set laststatus=2    "Always show status line
 
