@@ -31,24 +31,50 @@
 
 ;;packages
 (use-package evil)
-(use-package solarized-theme)
+(use-package monokai-theme)
 (use-package neotree)
 (use-package helm)
 (use-package magit)
 
 ;;Visual customization
-(load-theme 'solarized-dark t)
+(load-theme 'monokai t)
 
 ;;Use evil mode
 (evil-mode t)
 
+;;Show line numbers
+(global-display-line-numbers-mode)
+
+;;Tab bar
+(global-tab-line-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;Org mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'org)
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
+(define-key global-map "\C-cc" 'org-capture)
+(setq org-default-notes-file (concat org-directory "/inbox.org"))
 (setq org-log-done t)
+;;Add next keyword
+(setq org-todo-keywords '((sequence "TODO" "NEXT" "WAITING" "DONE")))
+;;Use all files in org directory for building agenda view
+(setq org-agenda-files `(,org-directory))
+;;Allow refiling at the top level of a file
+(setq org-refile-use-outline-path 'file)
+;;Copy-pasted code that lets me refile to any other file used in agenda view
+(setq org-refile-targets '((nil :maxlevel . 9)
+                                (org-agenda-files :maxlevel . 9)))
+(setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
+(setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+;;Indent outline stages more
+(setq org-startup-indented 1)
+(setq org-indent-indentation-per-level 4)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;evil mode keybindings
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar my-leader-map (make-sparse-keymap)
   "Keymap for \"leader key\" shortcuts.")
 
@@ -81,7 +107,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (evil use-package))))
+ '(custom-safe-themes
+   '("f3ab34b145c3b2a0f3a570ddff8fabb92dafc7679ac19444c31058ac305275e1" default))
+ '(org-hide-leading-stars t)
+ '(package-selected-packages '(evil use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
