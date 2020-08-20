@@ -48,6 +48,9 @@
 ;;Tab bar
 (global-tab-line-mode)
 
+;;Make fullscreen
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;Org mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -71,7 +74,10 @@
 ;;Indent outline stages more
 (setq org-startup-indented 1)
 (setq org-indent-indentation-per-level 4)
-;;Custom keybindings
+
+;;Wrap
+(add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
+(add-hook 'org-mode-hook 'auto-fill-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;evil mode keybindings
