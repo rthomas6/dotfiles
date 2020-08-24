@@ -79,6 +79,9 @@
 (add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
 (add-hook 'org-mode-hook 'auto-fill-mode)
 
+;;Show images
+(setq org-startup-with-inline-images 1)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;evil mode keybindings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -108,6 +111,12 @@
 (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
 (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
 (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
+
+;;Make words include underscores in VHDL
+(add-hook 'vhdl-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+
+;;Other custom keybindings
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;;Default file
 (find-file "~/org/projects.org")
