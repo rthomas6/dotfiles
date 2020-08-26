@@ -41,6 +41,10 @@
 
 ;;Use evil mode
 (evil-mode t)
+;;Helm
+(helm-mode t)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 ;;Show line numbers
 (global-display-line-numbers-mode)
