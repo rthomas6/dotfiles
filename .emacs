@@ -35,6 +35,7 @@
 (use-package neotree)
 (use-package helm)
 (use-package magit)
+(use-package projectile)
 
 ;;Visual customization
 (load-theme 'monokai t)
@@ -86,6 +87,12 @@
 
 ;;Show images
 (setq org-startup-with-inline-images 1)
+(setq org-image-actual-width nil)
+
+;;Helm
+(helm-mode t)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;evil mode keybindings
