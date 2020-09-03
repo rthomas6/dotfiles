@@ -36,6 +36,11 @@
 (use-package helm)
 (use-package magit)
 (use-package projectile)
+(use-package helm-projectile)
+(use-package helm-ag)
+(use-package evil-numbers)
+(use-package dumb-jump)
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
 ;;Visual customization
 (load-theme 'monokai t)
@@ -47,10 +52,6 @@
 
 ;;Use evil mode
 (evil-mode t)
-;;Helm
-(helm-mode t)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 ;;Show line numbers
 (global-display-line-numbers-mode)
@@ -87,7 +88,7 @@
 
 ;;Wrap
 (add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
-(add-hook 'org-mode-hook 'auto-fill-mode)
+;;(add-hook 'org-mode-hook 'auto-fill-mode)
 
 ;;Show images
 (setq org-startup-with-inline-images 1)
@@ -98,6 +99,10 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
+;;Projectile
+(projectile-mode t)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;evil mode keybindings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -107,7 +112,10 @@
 ;; binding "," to the keymap
 (define-key evil-normal-state-map "," my-leader-map)
 
-(define-key my-leader-map "n" 'neotree-toggle)
+;;(define-key my-leader-map "n" 'neotree-toggle)
+(define-key my-leader-map "n" 'helm-find-files)
+(define-key my-leader-map "b" 'helm-mini)
+(define-key my-leader-map "p" 'projectile-command-map)
 (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
 (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
 (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
@@ -117,6 +125,9 @@
 (define-key evil-normal-state-map "H" 'previous-buffer)
 (define-key evil-normal-state-map "L" 'next-buffer)
 (define-key global-map (kbd "M-b") 'helm-mini)
+
+(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+(define-key evil-normal-state-map (kbd "C-z") 'evil-numbers/dec-at-pt)
 
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
