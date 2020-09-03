@@ -30,11 +30,22 @@
 (require 'use-package)
 
 ;;packages
-(use-package evil)
+(use-package evil
+  :config
+  (evil-mode t))
+
 (use-package monokai-theme)
 (use-package neotree)
-(use-package helm)
+(use-package helm
+  :config
+  (helm-mode t))
+
 (use-package magit)
+
+(use-package org-journal
+  :config
+  (setq org-journal-file-type 'daily)
+  (setq org-journal-dir "~/journal"))
 (use-package projectile)
 
 ;;Visual customization
@@ -44,13 +55,6 @@
 ;;(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
-
-;;Use evil mode
-(evil-mode t)
-;;Helm
-(helm-mode t)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 ;;Show line numbers
 (global-display-line-numbers-mode)
@@ -94,7 +98,6 @@
 (setq org-image-actual-width nil)
 
 ;;Helm
-(helm-mode t)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
@@ -117,6 +120,7 @@
 (define-key evil-normal-state-map "H" 'previous-buffer)
 (define-key evil-normal-state-map "L" 'next-buffer)
 (define-key global-map (kbd "M-b") 'helm-mini)
+(define-key my-leader-map "j" 'org-journal-new-entry)
 
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
@@ -153,6 +157,7 @@
       (file "~/org/inbox.org")
       "")))
  '(org-hide-leading-stars t)
+ '(org-stuck-projects '("project+LEVEL=2/-DONE" ("TODO" "WAITING") nil ""))
  '(package-selected-packages '(evil use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
