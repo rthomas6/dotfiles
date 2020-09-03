@@ -1,11 +1,3 @@
-;; global variables
-
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-(package-initialize)
-
 (setq
  inhibit-startup-screen t
  create-lockfiles nil
@@ -17,24 +9,42 @@
  sentence-end-double-space nil)
 
 ;; Package manager
-(require 'package)
-(setq package-enable-at-startup nil)
-
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+;; Straight
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+;; Use Straight by default
+(setq straight-use-package-by-default t)
 
 ;; Bootstrap `use-package`
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(require 'use-package)
+(straight-use-package 'use-package)
 
 ;;packages
-(use-package evil)
+(use-package evil
+  :config
+  (evil-mode t))
+
 (use-package monokai-theme)
 (use-package neotree)
-(use-package helm)
+(use-package helm
+  :config
+  (helm-mode t))
+
 (use-package magit)
+
+(use-package org-journal
+  :config
+  (setq org-journal-file-type 'daily)
+  (setq org-journal-dir "~/journal"))
 (use-package projectile)
 (use-package helm-projectile)
 (use-package helm-ag)
@@ -49,9 +59,6 @@
 ;;(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
-
-;;Use evil mode
-(evil-mode t)
 
 ;;Show line numbers
 (global-display-line-numbers-mode)
@@ -95,7 +102,6 @@
 (setq org-image-actual-width nil)
 
 ;;Helm
-(helm-mode t)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
@@ -125,6 +131,7 @@
 (define-key evil-normal-state-map "H" 'previous-buffer)
 (define-key evil-normal-state-map "L" 'next-buffer)
 (define-key global-map (kbd "M-b") 'helm-mini)
+(define-key my-leader-map "j" 'org-journal-new-entry)
 
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-z") 'evil-numbers/dec-at-pt)
@@ -164,6 +171,7 @@
       (file "~/org/inbox.org")
       "")))
  '(org-hide-leading-stars t)
+ '(org-stuck-projects '("project+LEVEL=2/-DONE" ("TODO" "WAITING") nil ""))
  '(package-selected-packages '(evil use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
