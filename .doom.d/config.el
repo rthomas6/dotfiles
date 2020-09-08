@@ -54,22 +54,28 @@
 ;; they are implemented.
 
 ;; Treat underscore as word character
-(add-hook! 'vhdl-mode (modify-syntax-entry ?_ "w"))
-(add-hook! 'sh-mode (modify-syntax-entry ?_ "w"))
-(add-hook! 'tcl-mode (modify-syntax-entry ?_ "w"))
+(modify-syntax-entry ?_ "w")
+(add-hook! (vhdl-mode sh-mode tcl-mode) :append (modify-syntax-entry ?_ "w"))
+;(add-hook! 'sh-mode (modify-syntax-entry ?_ "w"))
+;(add-hook! 'tcl-mode (modify-syntax-entry ?_ "w"))
+
+(add-hook! org-mode (setq fill-column 80))
+
+;VHDL 2008 for syntax checking
+(add-hook! vhdl-mode :append (setq flycheck-ghdl-language-standard "08"))
 
 ;; Custom keybindings
 (map! :nivr "C-j" 'evil-window-down
       :nivr "C-k" 'evil-window-up
       :nivr "C-h" 'evil-window-left
       :nivr "C-l" 'evil-window-right
-      :n "H" 'previous-buffer
-      :n "L" 'next-buffer)
+      :n "L" 'centaur-tabs-forward
+      :n "H" 'centaur-tabs-backward)
 
 (map! :prefix ("," . "Ray's leader key")
       :n "h" 'help-for-help
       :n "b" 'switch-to-buffer
-      :n "n" 'treemacs)
+      :n "n" 'neotree-toggle)
 ;; Org capture templates
 (after! org
   (setq
@@ -79,12 +85,12 @@
    org-capture-projects-file "~/org/projects.org")
   (add-to-list 'org-capture-templates
                '("i" "Add note to inbox" entry
-                (file +org-capture-inbox-file)
+                (file "~/org/inbox.org")
                 ""
                 :prepend t :kill-buffer t))
   (add-to-list 'org-capture-templates
                '("g" "Add item to grocery list" checkitem
-                (file+olp +org-capture-projects-file "Lists" "Groceries")
+                (file+olp "~/org/projects.org" "Lists" "Groceries")
                 ""
                 :prepend t :kill-buffer t)))
 
