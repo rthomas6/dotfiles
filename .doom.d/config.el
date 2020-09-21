@@ -55,14 +55,22 @@
 
 ;; Treat underscore as word character
 (modify-syntax-entry ?_ "w")
-(add-hook! (vhdl-mode sh-mode tcl-mode) :append (modify-syntax-entry ?_ "w"))
+(add-hook! (vhdl-mode sh-mode tcl-mode c-mode c++-mode) :append (modify-syntax-entry ?_ "w"))
 ;(add-hook! 'sh-mode (modify-syntax-entry ?_ "w"))
 ;(add-hook! 'tcl-mode (modify-syntax-entry ?_ "w"))
 
-(add-hook! org-mode (setq fill-column 80))
+(add-hook! org-mode :append :local
+  (setq fill-column 80)
+  (setq truncate-lines nil))
+(add-hook! org-mode :append
+  ;I don't want to open file links in dired
+   (setq org-file-apps (remove '(directory . emacs) org-file-apps)))
 
 ;VHDL 2008 for syntax checking
 (add-hook! vhdl-mode :append (setq flycheck-ghdl-language-standard "08"))
+
+;Tramp use my path
+(after! tramp (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
 ;; Custom keybindings
 (map! :nivr "C-j" 'evil-window-down
