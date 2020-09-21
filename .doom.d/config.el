@@ -104,5 +104,8 @@
                 ""
                 :prepend t :kill-buffer t)))
 
+(after! org-journal
+  (setq org-journal-dir "~/journal/"))
+
 ;;Make fullscreen
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
