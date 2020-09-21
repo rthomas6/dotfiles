@@ -75,14 +75,24 @@
 (map! :prefix ("," . "Ray's leader key")
       :n "h" 'help-for-help
       :n "b" 'switch-to-buffer
-      :n "n" 'neotree-toggle)
-;; Org capture templates
+      :n "n" 'neotree-toggle
+      :n "t" 'org-todo-list
+      :n "j" 'org-journal-new-entry
+      :n "c" 'org-capture
+      :n "p" (cmd! (find-file "~/org/projects.org")))
+
+;; Org config
 (after! org
   (setq
+   ;Add a D level priority and make C the default
+   org-lowest-priority 68
+   org-default-priority 67
    org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)"))
    org-stuck-projects '("project+LEVEL=2/-DONE" ("TODO" "WAITING") nil "")
    org-capture-inbox-file "~/org/inbox.org"
-   org-capture-projects-file "~/org/projects.org")
+   org-capture-projects-file "~/org/projects.org"
+   org-agenda-todo-ignore-scheduled 'future)
+  ;Org capture templates
   (add-to-list 'org-capture-templates
                '("i" "Add note to inbox" entry
                 (file "~/org/inbox.org")
