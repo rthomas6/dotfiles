@@ -79,7 +79,8 @@
       :n "t" 'org-todo-list
       :n "j" 'org-journal-new-entry
       :n "c" 'org-capture
-      :n "p" (cmd! (find-file "~/org/projects.org")))
+      :n "p" (cmd! (find-file "~/org/projects.org"))
+      :n "f" (cmd! (find-file "~/finance/personal.dat")))
 
 ;; Org config
 (after! org
@@ -87,7 +88,7 @@
    ;Add a D level priority and make C the default
    org-lowest-priority 68
    org-default-priority 67
-   org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)"))
+   org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "DELEGATED(e)" "|" "DONE(d)"))
    org-stuck-projects '("project+LEVEL=2/-DONE" ("TODO" "WAITING") nil "")
    org-capture-inbox-file "~/org/inbox.org"
    org-capture-projects-file "~/org/projects.org"
