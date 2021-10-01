@@ -41,6 +41,7 @@
 
 (use-package magit)
 
+(use-package org)
 (use-package org-journal
   :config
   (setq org-journal-file-type 'daily)

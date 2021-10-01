@@ -80,7 +80,7 @@
       :n "j" 'org-journal-new-entry
       :n "c" 'org-capture
       :n "p" (cmd! (find-file "~/org/projects.org"))
-      :n "f" (cmd! (find-file "~/finance/personal.dat")))
+      :n "f" (cmd! (find-file "~/finance/personal.beancount")))
 
 ;; Org config
 (after! org
@@ -97,7 +97,7 @@
   (add-to-list 'org-capture-templates
                '("i" "Add note to inbox" entry
                 (file "~/org/inbox.org")
-                ""
+                "* %?"
                 :prepend t :kill-buffer t))
   (add-to-list 'org-capture-templates
                '("g" "Add item to grocery list" checkitem
@@ -105,8 +105,16 @@
                 ""
                 :prepend t :kill-buffer t)))
 
-(after! org-journal
-  (setq org-journal-dir "~/journal/"))
+;(after! org-journal
+;  (setq org-journal-dir "~/journal/"))
+
+;(after! ledger
+;  (setq ledger-post-account-alignment-column 78))
+
+;Beancount
+(use-package! beancount
+  :defer t
+  :mode ("\\.beancount\\'" . beancount-mode))
 
 ;;Make fullscreen
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
