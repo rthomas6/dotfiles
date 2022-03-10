@@ -87,7 +87,8 @@
       :n "t" 'org-todo-list
       :n "j" 'org-journal-new-entry
       :n "c" 'org-capture
-      :n "p" (cmd! (find-file "~/org/projects.org")))
+      :n "p" (cmd! (find-file "~/org/projects.org"))
+      :n "f" (cmd! (find-file "~/finance/personal.beancount")))
 
 ;; Org config
 (after! org
@@ -95,7 +96,7 @@
    ;Add a D level priority and make C the default
    org-lowest-priority 68
    org-default-priority 67
-   org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)"))
+   org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "DELEGATED(e)" "|" "DONE(d)"))
    org-stuck-projects '("project+LEVEL=2/-DONE" ("TODO" "WAITING") nil "")
    org-capture-inbox-file "~/org/inbox.org"
    org-capture-projects-file "~/org/projects.org"
@@ -104,7 +105,7 @@
   (add-to-list 'org-capture-templates
                '("i" "Add note to inbox" entry
                 (file "~/org/inbox.org")
-                ""
+                "* %?"
                 :prepend t :kill-buffer t))
   (add-to-list 'org-capture-templates
                '("g" "Add item to grocery list" checkitem
@@ -112,8 +113,16 @@
                 ""
                 :prepend t :kill-buffer t)))
 
-(after! org-journal
-  (setq org-journal-dir "~/journal/"))
+;(after! org-journal
+;  (setq org-journal-dir "~/journal/"))
+
+;(after! ledger
+;  (setq ledger-post-account-alignment-column 78))
+
+;Beancount
+(use-package! beancount
+  :defer t
+  :mode ("\\.beancount\\'" . beancount-mode))
 
 ;;Make fullscreen
 (add-to-list 'default-frame-alist '(fullscreen . maximized))

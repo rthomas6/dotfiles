@@ -21,7 +21,7 @@ set encoding=utf-8 "Unicode
 set background=dark
 if has('gui_running')
     colorscheme solarized
-    set guifont="Inconsolata 11"
+    set guifont=Inconsolata\ 13
     set guioptions+=b "Bottom scroll bar
 endif
 set laststatus=2    "Always show status line
@@ -45,7 +45,7 @@ set hlsearch		"Highlight search matches
 set ignorecase      "Ignore case when searching
 set smartcase " ...except if there's capitals
 
-set colorcolumn=120 "Set color column to know when line is too long
+"set colorcolumn=120 "Set color column to know when line is too long
 
 "set foldenable		"enable folding
 "set foldlevelstart=10	"open most folds by default
