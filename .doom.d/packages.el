@@ -48,9 +48,3 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
-
-(package! beancount
-  :recipe (:local-repo "/home/ray/.local/elisp"))
-
-(package! nim-mode)
-(package! rust-mode)
