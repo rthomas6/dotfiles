@@ -53,6 +53,11 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Make magit use new git on oak
+(add-hook! magit-mode :append :local
+  (when (string-equal (tramp-handle-file-remote-p (buffer-file-name) 'host) "oak")
+    (setq magit-remote-git-executable "/opt/rh/rh-git218/root/usr/bin/git")))
+
 ;; Make Projectile work for nested git submodules
 (after! projectile
   (setq projectile-indexing-method 'native))
