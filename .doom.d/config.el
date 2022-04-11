@@ -96,8 +96,7 @@
       :n "t" 'org-todo-list
       :n "j" 'org-journal-new-entry
       :n "c" 'org-capture
-      :n "p" (cmd! (find-file "~/org/projects.org"))
-      :n "f" (cmd! (find-file "~/finance/personal.beancount")))
+      :n "p" (cmd! (find-file "~/org/projects.org")))
 
 ;; Org config
 (after! org
@@ -122,16 +121,8 @@
                 ""
                 :prepend t :kill-buffer t)))
 
-;(after! org-journal
-;  (setq org-journal-dir "~/journal/"))
-
-;(after! ledger
-;  (setq ledger-post-account-alignment-column 78))
-
-;Beancount
-(use-package! beancount
-  :defer t
-  :mode ("\\.beancount\\'" . beancount-mode))
+(after! org-journal
+  (setq org-journal-dir "~/journal/"))
 
 ;;Make fullscreen
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
