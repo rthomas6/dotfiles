@@ -49,8 +49,8 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-(package! beancount
-  :recipe (:local-repo "/home/ray/.local/elisp"))
+(package! beancount-mode
+  :recipe (:host github :repo "beancount/beancount-mode"))
 
 (package! nim-mode)
 (package! rust-mode)
