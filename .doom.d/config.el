@@ -98,6 +98,9 @@
       :n "c" 'org-capture
       :n "p" (cmd! (find-file "~/org/projects.org")))
 
+(map! :mode evil-org-agenda-mode-map
+      :n "f" 'org-agenda-filter)
+
 ;; Org config
 (after! org
   (setq
