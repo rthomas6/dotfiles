@@ -107,7 +107,7 @@
    ;Add a D level priority and make C the default
    org-lowest-priority 68
    org-default-priority 67
-   org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "DELEGATED(e)" "|" "DONE(d)"))
+   org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)"))
    org-stuck-projects '("project+LEVEL=2/-DONE" ("TODO" "WAITING") nil "")
    org-capture-inbox-file "~/org/inbox.org"
    org-capture-projects-file "~/org/projects.org"
