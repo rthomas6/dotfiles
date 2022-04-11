@@ -53,6 +53,10 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Make Projectile work for nested git submodules
+(after! projectile
+  (setq projectile-indexing-method 'native))
+
 ;; Treat underscore as word character
 (modify-syntax-entry ?_ "w")
 (add-hook! (vhdl-mode sh-mode tcl-mode c-mode c++-mode) :append (modify-syntax-entry ?_ "w"))
